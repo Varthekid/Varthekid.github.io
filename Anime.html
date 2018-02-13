@@ -1,1 +1,93 @@
-<h1>Yolo</h1>
+<!DOCTYPE html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
+<script src="/assets/jquery.js"></script>
+<style>
+body {
+  text-align: center;
+  font-family: 'Indie Flower';
+  font-size: 40px;
+  background: url("https://hdwallsource.com/img/2014/9/gorgeous-anime-scenery-wallpaper-42590-43600-hd-wallpapers.jpg");
+  color:#177245;
+}
+button {
+  margin: 30px;
+}
+input {
+  font-size: 40px;
+}
+.fill {
+  background: #FFEBCD;
+  color: indigo;
+  border-bottom: 2px black solid;
+  font-family: 'Berksire Swash';
+  padding: 0 12px;
+  margin: 6px;
+}
+</style>
+</head>
+
+<body>
+<div class="prompt"></div>
+<button>Next</button>
+<script>
+// List of prompts for the user
+var prompts = [
+	'Type your noun',
+	'Type a name',
+	'Type a adjective',
+	'Type a name',
+	'Type a adjective',
+	'Type a name',
+	'Type a adjective',
+	'Type a name',
+	'Type a adjective',
+	'Type a name',
+	'Type a adjective',
+	'Type a plural noun',
+	'Type a noun'
+   ];
+
+var answers=[];
+// Keep track of current prompt we're on
+var currentPrompt = 0;
+
+// A function that will call the next prompt
+var nextPrompt = function() {
+  //if there's no answer in the form
+  if (currentPrompt != 0){
+    answers.push($('input').val());
+  }
+	// if there is a next prompt
+	if (currentPrompt < prompts.length) {
+		// put first prompt in all html elements with class 
+		$('.prompt').html(prompts[currentPrompt] +'<br><input type="text">');
+		// move the next prompt into variable currentPrompt 
+		currentPrompt = currentPrompt + 1;
+	}
+	//or else if we're at the end of the array
+	else {
+		// put a new message into the html.
+		showFinal();
+	}
+}
+
+//puts user answers into HTML
+var showFinal = function() {
+  $('.prompt').html('Long ago existed the divine era. It was filled with <span class="fill">'+answers[0]+'</span> users, but eventually they started dying off. They tried all they can to save them, but couldn’t save all. Only 5 of them remained. <span class="fill">'+answers[1]+'</span> the <span class="fill">'+answers[2]+'</span> , controller of fire.<span class="fill">'+answers[3]+'</span> the <span class="fill">'+answers[4]+'</span> , controller of water. <span class="fill">'+answers[5]+'</span> the <span class="fill">'+answers[6]+'</span> ,controller of earth.<span class="fill">'+answers[7]+'</span> the <span class="fill">'+answers[8]+'</span>, controller of air. <span class="fill">'+answers[9]+'</span> the <span class="fill">'+answers[10]+'</span> , the one who controlled all the  <span class="fill">'+answers[11]+'</span>. They were known as the <span class="fill">'+answers[12]+'</span> ones. The one that controlled everything would be the one people would worship.</span>');
+  //and then hide the button
+  $('button').hide();
+}
+// run nextPrompt function when button is clicked
+$('button').click(function() {
+	nextPrompt();
+});
+
+// Show the first prompt as soon as js loads
+nextPrompt();
+</script>
+
+</body>
